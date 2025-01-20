@@ -6,6 +6,6 @@
     })
 </script>
 <template>
-    <Head title="Another Layout" />
-    <h1>Hello Buddy ! This is {{ user }}'s' Page</h1>
+    <Head :title="$page.component" />
+    <h1>{{ $page.props.auth.user }}</h1>  
 </template>
