@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 // Route::get('/about', function () {
+//     sleep(2);
 //     return inertia('About', ['user' => 'Deamon']);
 // });
 
