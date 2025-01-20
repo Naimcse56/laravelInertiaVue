@@ -5,7 +5,5 @@
 </script>
 
 <template>
-    <div>
-        <h1>Hello Buddy ! This is {{ user }}'s' Page</h1>
-    </div>
+    <h1>Hello Buddy ! This is {{ user }}'s' Page</h1>
 </template>

@@ -1,5 +1,8 @@
+<script setup>
+    import Layout from '../Layouts/LayoutSecond.vue';
+    defineOptions({layout: Layout});
+</script>
+
 <template>
-    <div>
-        <h1>Hello Buddy</h1>
-    </div>
+    <h1>Hello Buddy</h1>        
 </template>
