@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\AuthController;
 
 // Route::get('/about', function () {
 //     sleep(2);
@@ -9,5 +10,5 @@ use Inertia\Inertia;
 // });
 
 Route::inertia('/', 'Home')->name('home');
-Route::inertia('/about', 'About', ['user' => 'Deamon'])->name('about');
-Route::inertia('/another-layout', 'AnotherLayout', ['user' => 'Another Layout'])->name('another_layout');
+Route::inertia('/register', 'Register')->name('register');
+Route::post('/register',[AuthController::class, 'register'])->name('register');
