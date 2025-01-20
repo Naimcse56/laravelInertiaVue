@@ -5,6 +5,7 @@
                 <div class="space-x-6">
                     <Link href="/">Home</Link>
                     <Link href="/about">About</Link>
+                    <Link href="/another-layout">Another Layout</Link>
                 </div>
             </nav>
         </header>
