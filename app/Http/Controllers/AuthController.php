@@ -21,4 +21,28 @@ class AuthController extends Controller
         Auth::login($user);
         return redirect()->route('home');
     }
+
+    public function login(Request $request)
+    {
+        $validateData = $request->validate([
+                            'email' => 'required|email',
+                            'password' => 'required|min:6',
+                        ]);
+
+        if (Auth::attempt($validateData, $request->remember)) {
+            $request->session()->regenerate();
+            return redirect()->route('home'); // Redirect to dashboard or intended page
+        }
+
+        // If authentication fails
+        return back()->withErrors(['email' => 'Email or Password not found in Database!'])->withInput();
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();    
+        $request->session()->regenerateToken();    
+        return redirect('/');
+    }
 }

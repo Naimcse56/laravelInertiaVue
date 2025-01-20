@@ -10,5 +10,8 @@ use App\Http\Controllers\AuthController;
 // });
 
 Route::inertia('/', 'Home')->name('home');
-Route::inertia('/register', 'Register')->name('register');
+Route::inertia('/register', 'Auth/Register')->name('register');
 Route::post('/register',[AuthController::class, 'register'])->name('register');
+Route::inertia('/login', 'Auth/Login')->name('login');
+Route::post('/login',[AuthController::class, 'login'])->name('login');
+Route::post('/logout',[AuthController::class, 'logout'])->name('logout');

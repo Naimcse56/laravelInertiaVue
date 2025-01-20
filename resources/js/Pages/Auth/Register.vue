@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from 'vue';
 import { useForm  } from '@inertiajs/vue3'
-import TextInput from '../Components/TextInput.vue';
+import TextInput from '../../Components/TextInput.vue';
 
 const form = useForm({
     name: null,
@@ -27,7 +27,7 @@ const submit = () => {
             <TextInput type="password" name="password" label="Password" v-model="form.password" :message="form.errors.password"/>
             <TextInput type="password" name="password_confirmation" label="Confirm Password" v-model="form.password_confirmation" :message="form.errors.password_confirmation"/>
             <div>
-                <p class="text-slate-600 mb-2">Already a user? <a href="#" class="text-link">Login</a></p>
+                <p class="text-slate-600 mb-2">Already a user? <Link :href="route('login')" class="text-link">Login</Link></p>
                 <button class="primary-btn" :disabled="form.processing">Register Now</button>
             </div>
         </form>
