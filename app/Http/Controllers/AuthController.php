@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Traits\FileUploadTrait;
 
 class AuthController extends Controller
 {
+    use FileUploadTrait;
     public function register(Request $request)
     {
         sleep(1);
@@ -19,7 +21,7 @@ class AuthController extends Controller
                         ]);
         $user = User::create($validateData);
         Auth::login($user);
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
     }
 
     public function login(Request $request)
@@ -31,7 +33,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($validateData, $request->remember)) {
             $request->session()->regenerate();
-            return redirect()->route('home'); // Redirect to dashboard or intended page
+            return redirect()->route('dashboard'); // Redirect to dashboard or intended page
         }
 
         // If authentication fails
@@ -44,5 +46,24 @@ class AuthController extends Controller
         $request->session()->invalidate();    
         $request->session()->regenerateToken();    
         return redirect('/');
+    }
+
+    public function update_profile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'avatar' => 'nullable',
+        ]);
+        $user = auth()->user();
+        $user->name = $request->name;
+        if ($request->hasFile('avatar')) {
+            if($user->avatar)
+            {
+                $this->deleteFile($user->avatar);
+            }
+            $user->avatar = $this->uploadFile($request->avatar, 'user-profile-image');
+        }
+        $user->save();
+        return redirect()->route('dashboard');
     }
 }

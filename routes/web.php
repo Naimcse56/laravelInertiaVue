@@ -16,4 +16,8 @@ Route::middleware(['guest'])->group(function () {
     Route::inertia('/login', 'Auth/Login')->name('login');
     Route::post('/login',[AuthController::class, 'login'])->name('login');
 });
-Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
+Route::middleware(['auth'])->group(function () {
+    Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
+    Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
+    Route::post('/update-profile',[AuthController::class, 'update_profile'])->name('update_profile');
+});
