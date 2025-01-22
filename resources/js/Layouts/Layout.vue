@@ -8,7 +8,7 @@
                 </div>
                 <div v-if="$page.props.auth.user">
                     <div class="space-x-6">
-                        <img class="avatar" :src="$page.props.auth.user.avatar ? 'storage/'+$page.props.auth.user.avatar : ''" alt="">
+                        <Link :href="route('user_list')" class="nav-link" :class="{'bg-slate-700': $page.component === 'User'}">User</Link>
                         <Link :href="route('dashboard')" class="nav-link" :class="{'bg-slate-700': $page.component === 'Dashboard'}">Dashboard</Link>
                         <Link :href="route('logout')" class="nav-link" method="post" as="button" type="button">Logout</Link>
                     </div>

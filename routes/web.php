@@ -18,7 +18,8 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login',[AuthController::class, 'login'])->name('login');
 });
 Route::middleware(['auth'])->group(function () {
-    Route::inertia('/dashboard', 'Dashboard', ['users' => User::paginate(5)])->name('dashboard');
+    Route::inertia('/users-list', 'User', ['users' => User::paginate(6)])->name('user_list');
+    Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
     Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
     Route::post('/update-profile',[AuthController::class, 'update_profile'])->name('update_profile');
 });

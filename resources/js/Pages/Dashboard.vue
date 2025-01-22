@@ -2,7 +2,6 @@
 import { reactive } from 'vue';
 import { useForm  } from '@inertiajs/vue3'
 import TextInput from '../Components/TextInput.vue';
-import PaginationLinks from '../Components/PaginationLink.vue';
 
 const form = useForm({
     name: null,
@@ -19,17 +18,6 @@ const submit = () => {
         onError: () => form.reset('name','avatar'),
     });
 }
-
-defineProps({
-    users: String
-})
-
-const dateFormat = (data) => 
-    new Date(data).toLocaleDateString("en-us", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-    });
 </script>
 <template>
     <Head :title="$page.component" />
@@ -51,30 +39,5 @@ const dateFormat = (data) =>
                 <button class="primary-btn" :disabled="form.processing">Update</button>
             </div>
         </form>
-    </div>
-    <div class="w-4/4 mx-auto mt-2">
-        <table>
-            <thead>
-                <tr class="bg-slate-300">
-                <th scope="col">Avatar</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Created At</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="user in users.data" :key="user.id">
-                    <th>
-                        <img class="avatar" :src="user.avatar ? 'storage/'+user.avatar : ''" alt="">
-                    </th>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ dateFormat(user.created_at) }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <div>
-            <PaginationLinks :paginator="users" />
-        </div>
     </div>
 </template>
