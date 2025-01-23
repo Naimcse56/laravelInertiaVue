@@ -20,7 +20,7 @@ const submit = () => {
 }
 </script>
 <template>
-    <Head :title="$page.component" />
+    <Head :title="` ${$page.component}`" />
     <h1 class="title">Update Your Profile {{ $page.props.auth.user.name }}</h1>
     <div class="w-3/4 mx-auto">
         <form @submit.prevent="submit">

@@ -17,7 +17,7 @@ const submit = () => {
 
 </script>
 <template>
-    <Head :title="$page.component" />
+    <Head :title="` ${$page.component}`" />
     <h1 class="title">Login Your Account</h1>
     <div class="w-2/4 mx-auto">
         <form @submit.prevent="submit">

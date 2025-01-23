@@ -1,9 +1,21 @@
 <script setup>
+import { ref, watch } from "vue";
 import PaginationLinks from '../Components/PaginationLink.vue';
+import { router } from "@inertiajs/vue3";
+import { debounce } from "lodash";
 
-defineProps({
-    users: String
-})
+const props = defineProps({
+                    users: Object,
+                    searchTerm: String
+                });
+
+const search = ref(props.searchTerm);
+
+watch(
+  search,
+  debounce((q) => router.get("/users-list", { search: q }, { preserveState: true }), 500)
+);
+
 
 const dateFormat = (data) => 
     new Date(data).toLocaleDateString("en-us", {
@@ -13,9 +25,14 @@ const dateFormat = (data) =>
     });
 </script>
 <template>
-    <Head :title="$page.component" />
+    <Head :title="` ${$page.component}`" />
     <h1 class="title">Users List</h1>
     <div class="w-4/4 mx-auto">
+        <div class="flex justify-end mb-4">
+        <div class="w-1/4">
+            <input type="search" placeholder="Search" v-model="search" />
+        </div>
+        </div>
         <table>
             <thead>
                 <tr class="bg-slate-300">

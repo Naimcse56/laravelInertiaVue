@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Models\User;
 
 // Route::get('/about', function () {
@@ -18,7 +19,7 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login',[AuthController::class, 'login'])->name('login');
 });
 Route::middleware(['auth'])->group(function () {
-    Route::inertia('/users-list', 'User', ['users' => User::paginate(6)])->name('user_list');
+    Route::get('/users-list', [HomeController::class, 'index'])->name('user_list');
     Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
     Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
     Route::post('/update-profile',[AuthController::class, 'update_profile'])->name('update_profile');
